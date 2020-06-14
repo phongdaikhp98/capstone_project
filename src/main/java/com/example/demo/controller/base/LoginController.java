@@ -17,10 +17,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ApiResponse login(@RequestBody LoginModel loginModel) {
         String username = loginModel.getUsername();
         String password = loginModel.getPassword();
@@ -31,7 +28,7 @@ public class LoginController {
             if(user != null){
                 result = "Đăng nhập thành công!";
                 httpStatus = HttpStatus.OK;
-                return ApiResponse.success(user.getFirstname()+user.getLastname());
+                return ApiResponse.success(user);
             }
         }catch (Exception ex){
             result = "Đã có lỗi xảy ra";
